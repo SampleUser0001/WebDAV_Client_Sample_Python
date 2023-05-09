@@ -1,10 +1,10 @@
 # 任意のイメージを取得
-FROM python:latest
+FROM python:3.9
 
 RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 RUN python -m pip install --upgrade pip
-RUN pip install python-dotenv
+RUN pip install python-dotenv webdavclient3
 
 WORKDIR /opt/app
 
