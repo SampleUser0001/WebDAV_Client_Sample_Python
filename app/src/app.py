@@ -29,14 +29,15 @@ if __name__ == '__main__':
 
     options = {
         'webdav_hostname': ImportEnvKeyEnum.WEBDAV_URL.value,
-        'webdav_login': ImportEnvKeyEnum.WEBDAV_ID.value,
-        'webdav_password': ImportEnvKeyEnum.WEBDAV_KEY
+        'webdav_login':    ImportEnvKeyEnum.WEBDAV_ID.value,
+        'webdav_password': ImportEnvKeyEnum.WEBDAV_KEY.value
     }
     logger.debug(f'key : webdav_hostname , value : {options["webdav_hostname"]}')
     logger.debug(f'key : webdav_login , value : {options["webdav_login"]}')
 
     client = WebDAVClient(options)
-    
-    for (k, v) in client.get_items('/'):
-        logger.info(f'k : {k} , v : {v}')
-
+    remotepath = ''
+    logger.info(f'remotepath : {remotepath}, {client.check(remotepath)}')
+    for v in client.get_items(remotepath):
+        logger.info(f'item : {v}')
+        

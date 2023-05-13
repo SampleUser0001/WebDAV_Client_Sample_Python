@@ -2,7 +2,7 @@ from logging import getLogger, config, StreamHandler, DEBUG
 import os
 
 from logutil import LogUtil
-from typing import Dict
+from typing import Dict, List
 
 from webdav3.client import Client
 
@@ -21,14 +21,24 @@ logger.propagate = False
 class WebDAVClient:
     def __init__(self, options: Dict[str, str]):
         self.client = Client(options)
-        self.client.verify = False
+        self.client.verify = True
     
     def set_verify(self, is_verify:bool) -> None:
         self.client.verify = is_verify
 
-    def get_items(self, remotepath:str) -> Dict[str, str]:
+    def get_items(self, remotepath:str) -> List[str]:
         try:
-            self.client.info(remotepath)
+            if self.check(remotepath = remotepath):
+                items = self.client.list()
+                if items == None:
+                    return []
+                else:
+                    return items
+            else:
+                return []
         except Exception as e:
-            logger.error(e)
+            logger.error(e.__sta)
             raise e
+    
+    def check(self, remotepath:str) -> bool:
+        return self.client.check(remotepath)
