@@ -21,6 +21,16 @@ logger.setLevel(DEBUG)
 logger.addHandler(handler)
 logger.propagate = False
 
+def get_list(client, remote_path):
+    logger.info(f'remote_path : {remote_path} , {client.check(remote_path)}')
+    for v in client.get_items(remote_path):
+        logger.info(f'item : {v}, Directory : {client.is_file(v)}')
+
+def file_download(client, remote_path, local_path):
+   logger.info(f'File Downlad. from : {remote_path}, To : {local_path}')
+   client.download(remote_path, local_path)
+     
+
 if __name__ == '__main__':
     # 起動引数の取得
     # args = sys.argv
@@ -37,12 +47,9 @@ if __name__ == '__main__':
 
     client = WebDAVClient(options)
     remote_path = 'GoogleDrive/'
-    logger.info(f'remote_path : {remote_path} , {client.check(remote_path)}')
+    get_list(client, remote_path)
+        
+    filename = 'welcome_to_infinicloud_Japanese.pdf'
+    local_path = ImportEnvKeyEnum.WEBDAV_HOME.value+"/"+filename
+    file_download(client, filename, local_path)
     
-    for v in client.get_items(remote_path):
-        logger.info(f'item : {v}, Directory : {client.is_file(v)}')
-        
-    local_path = ImportEnvKeyEnum.WEBDAV_HOME.value+"/GoogleDrive"
-    logger.info(f'File Downlad. from : {remote_path}, To : {local_path}')
-    client.download(remote_path=remote_path, local_path=local_path)
-        
