@@ -32,6 +32,11 @@
       "level": "DEBUG",
       "handlers": ["consoleHandler", "fileHandler"],
       "propagate": false
+    },
+    "client": {
+      "level": "DEBUG",
+      "handlers": ["consoleHandler", "fileHandler"],
+      "propagate": false
     }
   },
 
