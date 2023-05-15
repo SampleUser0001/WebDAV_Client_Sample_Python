@@ -36,8 +36,13 @@ if __name__ == '__main__':
     logger.debug(f'key : webdav_login , value : {options["webdav_login"]}')
 
     client = WebDAVClient(options)
-    remotepath = ''
-    logger.info(f'remotepath : {remotepath}, {client.check(remotepath)}')
-    for v in client.get_items(remotepath):
-        logger.info(f'item : {v}')
+    remote_path = 'GoogleDrive/'
+    logger.info(f'remote_path : {remote_path} , {client.check(remote_path)}')
+    
+    for v in client.get_items(remote_path):
+        logger.info(f'item : {v}, Directory : {client.is_file(v)}')
+        
+    local_path = ImportEnvKeyEnum.WEBDAV_HOME.value+"/GoogleDrive"
+    logger.info(f'File Downlad. from : {remote_path}, To : {local_path}')
+    client.download(remote_path=remote_path, local_path=local_path)
         

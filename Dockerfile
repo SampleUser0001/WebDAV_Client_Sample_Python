@@ -12,6 +12,8 @@ COPY app /opt/app
 
 RUN chmod 755 /opt/app/start.sh
 
+RUN mkdir /tmp/webdav_home
+
 RUN python --version
 
 # ENTRYPOINT [ "/opt/app/start.sh" ]

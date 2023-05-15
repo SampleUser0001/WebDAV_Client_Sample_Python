@@ -13,3 +13,4 @@ class ImportEnvKeyEnum(Enum):
     WEBDAV_URL = os.getenv("WEBDAV_URL")
     WEBDAV_ID = os.getenv("WEBDAV_ID")
     WEBDAV_KEY = os.getenv("WEBDAV_KEY")
+    WEBDAV_HOME = os.getenv("WEBDAV_HOME")
